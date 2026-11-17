@@ -1,1 +1,59 @@
-{ "exportedAt": null, "facts": {} }
+{
+  "exportedAt": "2026-11-17",
+  "facts": {
+    "intl-china-clock": {
+      "region": "中国",
+      "fact": "中国では時計を贈らないのが一般的（「送鐘」が「送終＝最期を看取る」と同じ音のため）。刃物・ハンカチ・傘・鏡なども避けられる",
+      "sources": [
+        "https://trade.gov/country-commercial-guides/china-selling-factors-and-techniques",
+        "https://theculturalatlas.org/chinese-culture/chinese-culture-etiquette"
+      ],
+      "checked": "2026-11-17"
+    },
+    "intl-china-decline": {
+      "region": "中国",
+      "fact": "受け取る前に2〜3回辞退するのが礼儀とされ、贈った人の前ではすぐに開けないことが多い。両手で渡す",
+      "sources": [
+        "https://theculturalatlas.org/chinese-culture/chinese-culture-etiquette",
+        "https://debretts.com/etiquette-category/international-etiquette/"
+      ],
+      "checked": "2026-11-17"
+    },
+    "intl-saudi-hand-alcohol": {
+      "region": "サウジアラビア",
+      "fact": "お酒（アルコールを含む品）と豚肉製品を避け、右手か両手で渡す",
+      "sources": [
+        "https://theculturalatlas.org/saudi-arabian-culture/saudi-arabian-culture-etiquette",
+        "https://www.lloydsbanktrade.com/en/market-potential/saudi-arabia/opening-hours"
+      ],
+      "checked": "2026-11-17"
+    },
+    "intl-russia-flowers": {
+      "region": "ロシア",
+      "fact": "お祝いの花は奇数本。偶数本は葬儀のためのもの",
+      "sources": [
+        "https://theculturalatlas.org/russian-culture/russian-culture-etiquette",
+        "https://spb.hse.ru/soc/illuminated/news/1065092110.html"
+      ],
+      "checked": "2026-11-17"
+    },
+    "intl-us-federal-gift": {
+      "region": "米国",
+      "fact": "連邦政府職員は外部からの贈りものを原則受け取れない。例外は1回20ドル以下、同じ相手から年50ドルまで（5 CFR 2635.204）",
+      "sources": [
+        "https://www.doi.gov/sites/doi.gov/files/uploads/section_5_cfr_2635_204a.pdf",
+        "https://oge.gov/Web/oge.nsf/0/31AAB7DA89691749852585B6005A15A4/$FILE/Gifts%20Virtual%20Session%20Materials%20(1).pdf"
+      ],
+      "checked": "2026-11-17"
+    },
+    "intl-shipping-restriction": {
+      "region": "全般",
+      "fact": "国際郵便には条約による禁制品があり、さらに国ごとに送れない品（肉・酒・果物など）が決まっている",
+      "sources": [
+        "https://www.post.japanpost.jp/int/use/restriction/upc.html",
+        "https://www.post.japanpost.jp/int/ems/ryugaku/know/"
+      ],
+      "checked": "2026-11-17"
+    }
+  }
+}

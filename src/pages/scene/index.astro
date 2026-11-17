@@ -1,0 +1,14 @@
+---
+import Base from "../../layouts/Base.astro";
+import themes from "../../data/themes.json";
+const scenes = themes.filter((t) => t.kind === "scene");
+const groups = [["business", "ビジネスの贈りもの"], ["personal", "お祝いとお返し"]] as const;
+---
+<Base title="シーンから選ぶ" description="手土産、開業・昇進祝い、結婚・出産祝いと内祝いなど、季節を問わないお祝いの場面ごとに、贈りものの選び方とマナーをまとめています。" crumbs={[{ name: "シーンから選ぶ", href: "/scene/" }]}>
+  <h1>シーンから選ぶ</h1>
+  {groups.map(([g, label]) => (
+    <section><h2>{label}</h2>
+      <ul class="theme-grid">{scenes.filter((t) => (t as { group?: string }).group === g).map((t) => <li class="theme"><a href={`/scene/${t.id}/`}><strong>{t.name}</strong><span>{t.lead}</span></a></li>)}</ul>
+    </section>
+  ))}
+</Base>

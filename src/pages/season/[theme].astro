@@ -4,7 +4,7 @@ import ArticleList from "../../components/ArticleList.astro";
 import themes from "../../data/themes.json";
 import { publishedArticles } from "../../articles";
 export async function getStaticPaths() {
-  return themes.map((t) => ({ params: { theme: t.id }, props: { t } }));
+  return themes.filter((t) => t.kind !== "scene").map((t) => ({ params: { theme: t.id }, props: { t } }));
 }
 const { t } = Astro.props;
 const items = (await publishedArticles()).filter((a) => a.data.theme === t.id);

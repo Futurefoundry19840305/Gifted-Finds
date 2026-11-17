@@ -6,6 +6,6 @@ const label = { peak: "いまが旬", launch: "まもなく", prepare: "準備�
 <Base title="季節特集" description="お歳暮・おせち・加湿器・福袋など、季節の行事と暮らしに合わせた特集の一覧です。時期に合わせて内容を更新しています。" crumbs={[{ name: "季節特集", href: "/season/" }]}>
   <h1>季節特集</h1>
   <ul class="theme-grid">
-    {themes.map((t) => <li class={`theme theme-${t.state}`}><a href={`/season/${t.id}/`}><em>{label[t.state]}</em><strong>{t.name}</strong><span>{t.lead || `${t.peak[0].replace("-", "月")}日ごろから特集します。`}</span></a></li>)}
+    {themes.filter((t) => t.kind !== "scene").map((t) => <li class={`theme theme-${t.state}`}><a href={`/season/${t.id}/`}><em>{label[t.state]}</em><strong>{t.name}</strong><span>{t.lead || `${t.peak[0].replace("-", "月")}日ごろから特集します。`}</span></a></li>)}
   </ul>
 </Base>

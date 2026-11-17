@@ -6,7 +6,7 @@ import site from "../site.config.json";
 import { publishedArticles } from "../articles";
 const all = await publishedArticles();
 const order = { peak: 0, launch: 1, prepare: 2 } as Record<string, number>;
-const active = themes.filter((t) => t.state in order).sort((a, b) => order[a.state] - order[b.state]);
+const active = themes.filter((t) => t.kind !== "scene" && t.state in order).sort((a, b) => order[a.state] - order[b.state]);
 ---
 <Base title={site.name} description={`${site.tagline}。お歳暮・おせち・加湿器など、今の季節に必要なものを予算と用途で比べられます。`}
   jsonld={[{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url }]}>

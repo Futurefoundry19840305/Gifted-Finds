@@ -1,10 +1,202 @@
 [
-  { "id": "oseibo", "name": "お歳暮", "genre": "food", "peak": ["11-20", "12-20"], "state": "peak", "lead": "お世話になった方へ贈るお歳暮を、予算と相手別に比べて選べます。" },
-  { "id": "osechi", "name": "おせち", "genre": "food", "peak": ["12-01", "12-28"], "state": "launch", "lead": "2027年のおせちを、人数・予算・届け方で比べます。" },
-  { "id": "kashitsuki", "name": "加湿器", "genre": "kaden", "peak": ["11-15", "01-31"], "state": "peak", "lead": "部屋の広さと手入れのしやすさで選ぶ、冬の加湿器ガイド。" },
-  { "id": "christmas-gift", "name": "クリスマスギフト", "genre": "gift", "peak": ["12-01", "12-24"], "state": "launch", "lead": "相手と予算から探せるクリスマスプレゼント。" },
-  { "id": "fukubukuro", "name": "福袋", "genre": "gift", "peak": ["12-15", "01-10"], "state": "prepare", "lead": "2027年の福袋を、予約開始日と中身の傾向で整理します。" },
-  { "id": "valentine", "name": "バレンタイン", "genre": "food", "peak": ["01-25", "02-14"], "state": "dormant", "lead": "" },
-  { "id": "shinseikatsu-kaden", "name": "新生活家電", "genre": "kaden", "peak": ["02-15", "04-10"], "state": "dormant", "lead": "" },
-  { "id": "spring-camp", "name": "春キャンプ", "genre": "outdoor", "peak": ["03-20", "05-06"], "state": "dormant", "lead": "" }
+  {
+    "id": "oseibo",
+    "name": "お歳暮",
+    "genre": "food",
+    "peak": [
+      "11-20",
+      "12-20"
+    ],
+    "state": "peak",
+    "lead": "お世話になった方へ贈るお歳暮を、予算と相手別に比べて選べます。",
+    "kind": "season"
+  },
+  {
+    "id": "osechi",
+    "name": "おせち",
+    "genre": "food",
+    "peak": [
+      "12-01",
+      "12-28"
+    ],
+    "state": "launch",
+    "lead": "2027年のおせちを、人数・予算・届け方で比べます。",
+    "kind": "season"
+  },
+  {
+    "id": "kashitsuki",
+    "name": "加湿器",
+    "genre": "kaden",
+    "peak": [
+      "11-15",
+      "01-31"
+    ],
+    "state": "peak",
+    "lead": "部屋の広さと手入れのしやすさで選ぶ、冬の加湿器ガイド。",
+    "kind": "season"
+  },
+  {
+    "id": "christmas-gift",
+    "name": "クリスマスギフト",
+    "genre": "gift",
+    "peak": [
+      "12-01",
+      "12-24"
+    ],
+    "state": "launch",
+    "lead": "相手と予算から探せるクリスマスプレゼント。",
+    "kind": "season"
+  },
+  {
+    "id": "fukubukuro",
+    "name": "福袋",
+    "genre": "gift",
+    "peak": [
+      "12-15",
+      "01-10"
+    ],
+    "state": "prepare",
+    "lead": "2027年の福袋を、予約開始日と中身の傾向で整理します。",
+    "kind": "season"
+  },
+  {
+    "id": "valentine",
+    "name": "バレンタイン",
+    "genre": "food",
+    "peak": [
+      "01-25",
+      "02-14"
+    ],
+    "state": "dormant",
+    "lead": "",
+    "kind": "season"
+  },
+  {
+    "id": "shinseikatsu-kaden",
+    "name": "新生活家電",
+    "genre": "kaden",
+    "peak": [
+      "02-15",
+      "04-10"
+    ],
+    "state": "dormant",
+    "lead": "",
+    "kind": "season"
+  },
+  {
+    "id": "spring-camp",
+    "name": "春キャンプ",
+    "genre": "outdoor",
+    "peak": [
+      "03-20",
+      "05-06"
+    ],
+    "state": "dormant",
+    "lead": "",
+    "kind": "season"
+  },
+  {
+    "id": "temiyage-business",
+    "name": "ビジネスの手土産",
+    "genre": "gift",
+    "peak": [
+      "12-15",
+      "01-20"
+    ],
+    "state": "launch",
+    "lead": "初めての訪問や年末年始の挨拶回りに。個包装で日持ちする品を、相手と人数で選べます。",
+    "kind": "scene",
+    "group": "business"
+  },
+  {
+    "id": "kaigyo-iwai",
+    "name": "開業・移転祝い",
+    "genre": "gift",
+    "peak": [
+      "03-15",
+      "04-30"
+    ],
+    "state": "dormant",
+    "lead": "オフィスやお店に置ける観葉植物や花を中心に、贈る時期と避けたい品をまとめます。",
+    "kind": "scene",
+    "group": "business"
+  },
+  {
+    "id": "shoshin-iwai",
+    "name": "就任・昇進祝い",
+    "genre": "gift",
+    "peak": [
+      "03-20",
+      "04-30"
+    ],
+    "state": "dormant",
+    "lead": "人事異動の春と秋に。相手の好みが分かるときの名入れ品やお酒の選び方。",
+    "kind": "scene",
+    "group": "business"
+  },
+  {
+    "id": "shunen-kinen",
+    "name": "周年記念・社内配布",
+    "genre": "gift",
+    "peak": [
+      "01-01",
+      "12-31"
+    ],
+    "state": "launch",
+    "lead": "人数分に分けやすい菓子や飲料の詰め合わせを、予算と人数で比べます。",
+    "kind": "scene",
+    "group": "business"
+  },
+  {
+    "id": "kekkon-shussan",
+    "name": "結婚・出産祝いと内祝い",
+    "genre": "gift",
+    "peak": [
+      "01-01",
+      "12-31"
+    ],
+    "state": "launch",
+    "lead": "お祝いの相場と、いただいたお祝いへのお返し（内祝い）の時期と選び方。",
+    "kind": "scene",
+    "group": "personal"
+  },
+  {
+    "id": "shinchiku-hikkoshi",
+    "name": "新築祝い・引っ越しの挨拶",
+    "genre": "gift",
+    "peak": [
+      "02-15",
+      "04-15"
+    ],
+    "state": "dormant",
+    "lead": "新居に贈る品と、ご近所への挨拶の品の選び方。",
+    "kind": "scene",
+    "group": "personal"
+  },
+  {
+    "id": "taishoku-iwai",
+    "name": "退職・送別の贈りもの",
+    "genre": "gift",
+    "peak": [
+      "02-20",
+      "03-31"
+    ],
+    "state": "dormant",
+    "lead": "職場で贈る花束やプチギフトを、予算と人数で選べます。",
+    "kind": "scene",
+    "group": "personal"
+  },
+  {
+    "id": "chouju-iwai",
+    "name": "長寿祝い・敬老の日",
+    "genre": "gift",
+    "peak": [
+      "08-20",
+      "09-21"
+    ],
+    "state": "dormant",
+    "lead": "還暦・古希などの節目と、敬老の日の贈りもの。",
+    "kind": "scene",
+    "group": "personal"
+  }
 ]

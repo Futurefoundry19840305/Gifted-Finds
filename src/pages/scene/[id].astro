@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ArticleList from "../../components/ArticleList.astro";
+import themes from "../../data/themes.json";
+import { publishedArticles } from "../../articles";
+export function getStaticPaths() {
+  return themes.filter((t) => t.kind === "scene").map((t) => ({ params: { id: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const items = (await publishedArticles()).filter((a) => a.data.theme === t.id);
+const manners = await getCollection("manners", ({ data }) => data.status === "published" && data.theme === t.id);
+---
+<Base title={`${t.name}の贈りもの`} description={`${t.lead} マナーと比較記事をまとめています。`} crumbs={[{ name: "シーンから選ぶ", href: "/scene/" }, { name: t.name, href: `/scene/${t.id}/` }]}>
+  <h1>{t.name}</h1>
+  <p>{t.lead}</p>
+  <h2>マナーと選び方</h2>
+  {manners.length === 0 ? <p class="muted">準備中です。</p> : <ul class="article-list">{manners.map((m) => <li><a href={`/manners/${m.id}/`}><strong>{m.data.title}</strong><span class="desc">{m.data.description}</span></a></li>)}</ul>}
+  <h2>比べて選ぶ</h2>
+  <ArticleList items={items} />
+</Base>

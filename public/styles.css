@@ -68,3 +68,5 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { bord
 .tool input { min-height: 44px; font: inherit; padding: 0 12px; border: 1px solid #c9cec8; border-radius: 8px; width: 100%; max-width: 280px; box-sizing: border-box; }
 .tool .result { font-size: 18px; font-weight: 700; }
 .table-scroll { overflow-x: auto; }
+.chouju-list { margin: 8px 0 0; padding-left: 1.2em; }
+.chouju-list li:first-child { font-weight: 700; font-size: 17px; }

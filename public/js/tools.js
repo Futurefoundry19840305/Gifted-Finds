@@ -15,13 +15,22 @@
   if (c) {
     var rows = JSON.parse(c.dataset.rows), res = c.querySelector("[data-result]");
     var year = new Date().getFullYear();
+    var msg = function (t) { res.innerHTML = ""; var p = document.createElement("p"); p.className = "result"; p.textContent = t; res.appendChild(p); };
     c.querySelector("input").addEventListener("input", function (e) {
-      var b = Number(e.target.value);
-      if (!b || b < 1900 || b > year) { res.textContent = "生まれ年を入れると、次の長寿祝いが表示されます。"; return; }
-      var next = rows.find(function (r) { return b + r.age >= year; });
-      res.textContent = next
-        ? next.name + "（" + next.age + "歳・色は" + next.color + "）は " + (b + next.age) + "年です。"
-        : "早見表の範囲を超えています。";
+      var age = Number(e.target.value);
+      if (e.target.value === "" || !Number.isInteger(age) || age < 0 || age > 120) { msg("年齢を入れると、これから迎える長寿祝いが表示されます。"); return; }
+      var next = rows.filter(function (r) { return r.age >= age; });
+      if (!next.length) { msg("早見表の長寿祝い（百寿まで）はすべて迎えられています。"); return; }
+      res.innerHTML = "";
+      var ul = document.createElement("ul"); ul.className = "chouju-list";
+      next.forEach(function (r) {
+        var left = r.age - age;
+        var li = document.createElement("li");
+        var when = left === 0 ? "今年の誕生日（" + year + "年）" : "あと" + left + "年・" + (year + left) + "年の誕生日";
+        li.textContent = r.name + "（" + r.age + "歳・色は" + r.color + "）　" + when;
+        ul.appendChild(li);
+      });
+      res.appendChild(ul);
     });
   }
 })();

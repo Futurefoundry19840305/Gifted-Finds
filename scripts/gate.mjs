@@ -90,5 +90,21 @@ for (const file of mTargets) {
   report.push({ file, ok: errors.length === 0, errors });
 }
 
+// ---- 豆知識とツール（要件 第8.7章 / SG-07） ----
+const tipData = JSON.parse(fs.readFileSync("src/data/tips.json", "utf8")).tips;
+const toolData = JSON.parse(fs.readFileSync("src/data/tools.json", "utf8"));
+const extra = [
+  ...tipData.map((t) => ({ file: `tips.json#${t.id}`, status: t.status, facts: t.facts, text: t.title + t.body })),
+  ...["noshi", "okaeshi", "chouju"].map((k) => ({ file: `tools.json#${k}`, status: toolData[k].status, facts: toolData[k].facts, text: JSON.stringify(toolData[k]) })),
+];
+for (const x of extra) {
+  if (x.status !== "published") continue;
+  const errors = [];
+  for (const id of x.facts) if (!facts[id]) errors.push(`元帳にない事実: ${id}（SG-07）`);
+  const h = x.text.match(/必ず|絶対に|しなければなりません|非常識/);
+  if (h) errors.push(`断定表現「${h[0]}」（SG-08）`);
+  report.push({ file: x.file, ok: errors.length === 0, errors });
+}
+
 console.log(JSON.stringify({ checked: report.length, failed: report.filter((r) => !r.ok).length, report }, null, 2));
 process.exit(report.some((r) => !r.ok) ? 1 : 0);

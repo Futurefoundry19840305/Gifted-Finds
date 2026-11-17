@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import { publishedTips } from "../../tips";
+const tips = publishedTips();
+const cats = [...new Set(tips.map((t) => t.category))];
+---
+<Base title="贈りものの豆知識" description="水引の結び方、縁起のよい数や品、避けたい贈りもの、お返しの目安、楽天で贈るときの設定のコツなど、贈りものの豆知識をまとめています。" crumbs={[{ name: "贈りものの豆知識", href: "/tips/" }]}>
+  <h1>贈りものの豆知識</h1>
+  <p><a href="/tools/noshi/">のし早見表</a>・<a href="/tools/okaeshi/">お返しの目安計算</a>・<a href="/tools/chouju/">長寿祝いの早見表</a>も使えます。</p>
+  {tips.length === 0 ? <p class="muted">準備中です。</p> : cats.map((c) => (
+    <section><h2>{c}</h2>{tips.filter((t) => t.category === c).map((t) => (
+      <article id={t.id} class="tip"><p class="tip-title">{t.title}</p><p>{t.body}</p></article>
+    ))}</section>
+  ))}
+  <p class="note">しきたりは地域やご家庭によって異なります。各項目は出典を確認したうえで掲載しています。</p>
+</Base>

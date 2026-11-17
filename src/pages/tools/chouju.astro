@@ -1,0 +1,24 @@
+---
+import Base from "../../layouts/Base.astro";
+import tools from "../../data/tools.json";
+const t = tools.chouju;
+---
+<Base title="長寿祝いの早見表" description="還暦・古希・喜寿・米寿など、長寿祝いの名前と年齢、お祝いの色を一覧にしました。生まれ年を選ぶと、次に迎える長寿祝いがわかります。" crumbs={[{ name: "贈りものの豆知識", href: "/tips/" }, { name: "長寿祝いの早見表", href: "/tools/chouju/" }]}>
+  <h1>長寿祝いの早見表</h1>
+  {t.status !== "published" ? <p class="muted">準備中です。</p> : (
+    <>
+      <form class="tool" data-chouju data-rows={JSON.stringify(t.rows)} onsubmit="return false">
+        <label for="birth">生まれた年（西暦）</label>
+        <input id="birth" name="birth" type="number" inputmode="numeric" min="1900" max="2026" placeholder="例：1957" />
+        <p class="result" aria-live="polite" data-result>生まれ年を入れると、次の長寿祝いが表示されます。</p>
+      </form>
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col">名前</th><th scope="col">年齢</th><th scope="col">お祝いの色</th></tr></thead>
+        <tbody>{t.rows.map((r) => <tr><th scope="row">{r.name}</th><td>{r.age}歳</td><td>{r.color}</td></tr>)}</tbody>
+      </table></div>
+      <p class="note">満年齢で祝うのが一般的になっていますが、数え年で祝う地域やご家庭もあります。</p>
+      <p><a href="/scene/chouju-iwai/">長寿祝いの品を選ぶ</a></p>
+    </>
+  )}
+  <script src="/js/tools.js" defer></script>
+</Base>

@@ -1,4 +1,5 @@
 ---
+import TipBox from "../../components/TipBox.astro";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import ProductCard from "../../components/ProductCard.astro";
@@ -35,6 +36,7 @@ const crumbs = [{ name: genreName(d.genre), href: `/${d.genre}/` }, { name: d.ti
         {shown.map((p, i) => <ProductCard article={a.id} version={d.version} code={p.code} position={p.position} rank={d.type === "ranking" ? i + 1 : undefined} label={p.label} points={p.points} />)}
       </section>
     )}
+  <TipBox theme={d.theme} />
     <p class="note">掲載内容は更新日時点の情報です。価格・在庫・仕様は変わることがあるため、購入前に各商品ページでご確認ください。順位は当サイトの比較軸に基づく編集部の整理で、販売数の順位ではありません。</p>
   </article>
   <script src="/js/track.js" defer></script>

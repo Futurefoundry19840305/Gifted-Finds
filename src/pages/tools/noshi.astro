@@ -1,0 +1,18 @@
+---
+import Base from "../../layouts/Base.astro";
+import tools from "../../data/tools.json";
+const t = tools.noshi;
+---
+<Base title="のし早見表" description="お歳暮・出産祝い・結婚祝い・内祝い・開業祝いなど、場面ごとの水引の種類と表書きを一覧にしました。注文画面でのし紙を選ぶときにお使いください。" crumbs={[{ name: "贈りものの豆知識", href: "/tips/" }, { name: "のし早見表", href: "/tools/noshi/" }]}>
+  <h1>のし早見表</h1>
+  {t.status !== "published" ? <p class="muted">準備中です。</p> : (
+    <>
+      <p>楽天の注文画面で「のし」を選ぶときに、場面に合う水引と表書きを確かめられます。</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th scope="col">場面</th><th scope="col">水引</th><th scope="col">表書きの例</th></tr></thead>
+        <tbody>{t.rows.map((r) => <tr><th scope="row">{r.scene}</th><td>{r.mizuhiki}</td><td>{r.omote}</td></tr>)}</tbody>
+      </table></div>
+      <p class="note">一般的な例です。地域やご家庭、相手との関係によって異なることがあります。</p>
+    </>
+  )}
+</Base>

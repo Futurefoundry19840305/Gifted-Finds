@@ -1,0 +1,25 @@
+{
+  "_note": "ツールの参照データ。status=published で公開。facts は元帳のID（要件 SG-07）。",
+  "noshi": { "status": "draft", "facts": ["noshi-guide-table"], "rows": [
+    { "scene": "お歳暮・お中元", "mizuhiki": "紅白の蝶結び", "omote": "御歳暮／御中元" },
+    { "scene": "出産祝い", "mizuhiki": "紅白の蝶結び", "omote": "御出産御祝／御祝" },
+    { "scene": "出産内祝い", "mizuhiki": "紅白の蝶結び", "omote": "内祝（赤ちゃんの名前）" },
+    { "scene": "結婚祝い", "mizuhiki": "紅白または金銀の結び切り（10本）", "omote": "御結婚御祝／寿" },
+    { "scene": "結婚内祝い", "mizuhiki": "紅白の結び切り", "omote": "内祝（新しい姓または両家の姓）" },
+    { "scene": "新築祝い", "mizuhiki": "紅白の蝶結び", "omote": "御新築御祝" },
+    { "scene": "開業・開店祝い", "mizuhiki": "紅白の蝶結び", "omote": "御開業御祝／祝御開店" },
+    { "scene": "就任・昇進祝い", "mizuhiki": "紅白の蝶結び", "omote": "御就任御祝／御昇進御祝" },
+    { "scene": "定年退職", "mizuhiki": "紅白の蝶結び", "omote": "御退職御祝／感謝" },
+    { "scene": "長寿祝い", "mizuhiki": "紅白の蝶結び", "omote": "祝還暦（各長寿の名）／寿" },
+    { "scene": "お見舞い", "mizuhiki": "のしなし・紅白の結び切り、または無地", "omote": "御見舞" },
+    { "scene": "快気祝い", "mizuhiki": "紅白の結び切り", "omote": "快気祝" },
+    { "scene": "引っ越しの挨拶", "mizuhiki": "紅白の蝶結び", "omote": "御挨拶" }
+  ] },
+  "okaeshi": { "status": "draft", "facts": ["okaeshi-hangaeshi"], "minRate": 0.3333, "maxRate": 0.5 },
+  "chouju": { "status": "draft", "facts": ["chouju-list"], "rows": [
+    { "name": "還暦", "age": 60, "color": "赤" }, { "name": "古希", "age": 70, "color": "紫" },
+    { "name": "喜寿", "age": 77, "color": "紫" }, { "name": "傘寿", "age": 80, "color": "金茶・黄" },
+    { "name": "米寿", "age": 88, "color": "金茶・黄" }, { "name": "卒寿", "age": 90, "color": "紫" },
+    { "name": "白寿", "age": 99, "color": "白" }, { "name": "百寿", "age": 100, "color": "白・桃" }
+  ] }
+}

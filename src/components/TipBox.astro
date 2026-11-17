@@ -1,0 +1,13 @@
+---
+import { tipsForTheme } from "../tips";
+interface Props { theme: string }
+const tip = tipsForTheme(Astro.props.theme)[0];
+---
+{tip && (
+  <aside class="tip" aria-label="贈りものの豆知識">
+    <p class="tip-label">贈りものの豆知識</p>
+    <p class="tip-title">{tip.title}</p>
+    <p>{tip.body}</p>
+    <a href={`/tips/#${tip.id}`}>ほかの豆知識を見る</a>
+  </aside>
+)}

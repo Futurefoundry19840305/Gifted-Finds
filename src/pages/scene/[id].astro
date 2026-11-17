@@ -1,4 +1,5 @@
 ---
+import TipBox from "../../components/TipBox.astro";
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import ArticleList from "../../components/ArticleList.astro";
@@ -16,6 +17,7 @@ const manners = await getCollection("manners", ({ data }) => data.status === "pu
   <p>{t.lead}</p>
   <h2>マナーと選び方</h2>
   {manners.length === 0 ? <p class="muted">準備中です。</p> : <ul class="article-list">{manners.map((m) => <li><a href={`/manners/${m.id}/`}><strong>{m.data.title}</strong><span class="desc">{m.data.description}</span></a></li>)}</ul>}
+  <TipBox theme={t.id} />
   <h2>比べて選ぶ</h2>
   <ArticleList items={items} />
 </Base>

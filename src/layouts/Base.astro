@@ -35,6 +35,7 @@ const nav = [
   {[...breadcrumb, ...jsonld].map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
 </head>
 <body>
+  <a class="skip" href="#main">本文へスキップ</a>
   <p class="pr-bar">当サイトはプロモーション（広告）を含みます。<a href="/disclaimer/">広告について</a></p>
   <header class="site-header">
     <a class="logo" href="/">{site.name}</a>

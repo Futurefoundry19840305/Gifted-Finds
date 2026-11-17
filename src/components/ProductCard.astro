@@ -22,7 +22,7 @@ const available = p && p.availability === 1;
       </div>
     </div>
     {points.length > 0 && <ul class="points">{points.map((t) => <li>{t}</li>)}</ul>}
-    <a class="cta" href={goUrl(article, code, position, version)} rel="sponsored nofollow noopener" target="_blank">楽天市場で詳細を見る</a>
-    <p class="note">最新の価格・在庫・送料は楽天市場の商品ページでご確認ください。</p>
+    <a class="cta" href={goUrl(article, code, position, version)} rel="sponsored nofollow noopener" target="_blank">楽天で在庫と届く日を見る<span class="sr-only">（楽天市場のページが新しいタブで開きます）</span></a>
+    <p class="note">楽天市場へ移動します。注文は楽天市場の画面で確定するまで行われません。最新の価格・在庫・送料は商品ページでご確認ください。</p>
   </article>
 )}

@@ -1,4 +1,5 @@
 ---
+import Feedback from "../../components/Feedback.astro";
 import TipBox from "../../components/TipBox.astro";
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
@@ -37,6 +38,7 @@ const crumbs = [{ name: genreName(d.genre), href: `/${d.genre}/` }, { name: d.ti
       </section>
     )}
   <TipBox theme={d.theme} />
+    <Feedback />
     <p class="note">掲載内容は更新日時点の情報です。価格・在庫・仕様は変わることがあるため、購入前に各商品ページでご確認ください。順位は当サイトの比較軸に基づく編集部の整理で、販売数の順位ではありません。</p>
   </article>
 </Base>

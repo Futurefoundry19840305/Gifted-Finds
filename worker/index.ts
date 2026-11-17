@@ -55,8 +55,8 @@ async function handleGo(request: Request, env: Env, ctx: ExecutionContext): Prom
 
   const target = row?.affiliate_url || row?.item_url;
   if (!isAllowedRedirect(target)) {
-    // 楽天以外には絶対に転送しない（オープンリダイレクト対策）
-    return Response.redirect(new URL("/", url).toString(), 302);
+    // 楽天以外には転送しない（オープンリダイレクト対策）。理由と戻り方を示すページへ案内する
+    return Response.redirect(new URL("/unavailable/", url).toString(), 302);
   }
 
   const ua = request.headers.get("user-agent") || "";
@@ -102,6 +102,26 @@ async function handleView(request: Request, env: Env, ctx: ExecutionContext): Pr
     ctx.waitUntil(env.DB.prepare(
       "INSERT INTO views (date, path, count) VALUES (?, ?, 1) ON CONFLICT(date, path) DO UPDATE SET count = count + 1"
     ).bind(date, path).run());
+  }
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+}
+
+// ---------- 記事の評価（個人情報を扱わない集計） ----------
+const FEEDBACK_REASONS = new Set(["", "found", "clear", "hard-to-choose", "not-found", "price", "too-long"]);
+export function parseFeedback(raw: string) {
+  const [path, answer, reason = ""] = raw.slice(0, 200).split("|");
+  if (!normalizeViewPath(path ?? "") || (answer !== "yes" && answer !== "no") || !FEEDBACK_REASONS.has(reason)) return null;
+  return { path, answer, reason };
+}
+
+async function handleFeedback(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  if (request.method !== "POST") return new Response(null, { status: 405 });
+  const f = parseFeedback(await request.text());
+  if (f) {
+    const date = new Date().toISOString().slice(0, 10);
+    ctx.waitUntil(env.DB.prepare(
+      "INSERT INTO feedback (date, path, answer, reason, count) VALUES (?, ?, ?, ?, 1) ON CONFLICT(date, path, answer, reason) DO UPDATE SET count = count + 1"
+    ).bind(date, f.path, f.answer, f.reason).run());
   }
   return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 }
@@ -231,6 +251,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname.startsWith("/go/")) return handleGo(request, env, ctx);
     if (url.pathname === "/v") return handleView(request, env, ctx);
+    if (url.pathname === "/f") return handleFeedback(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
   async scheduled(event: ScheduledController, env: Env, ctx: ExecutionContext) {

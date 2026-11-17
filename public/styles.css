@@ -70,3 +70,12 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { bord
 .table-scroll { overflow-x: auto; }
 .chouju-list { margin: 8px 0 0; padding-left: 1.2em; }
 .chouju-list li:first-child { font-weight: 700; font-size: 17px; }
+/* アクセシビリティと人間中心設計の見直し（2026-11-17） */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 8px; top: -48px; padding: 8px 16px; background: #1c2126; color: #fff; border-radius: 8px; z-index: 10; }
+.skip:focus { top: 8px; }
+.price small { font-size: 13px; }
+.feedback { margin: 32px 0; padding: 16px 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+.feedback h2 { margin: 0 0 8px; border: 0; font-size: 16px; }
+.feedback button { min-height: 44px; padding: 0 16px; margin: 4px 8px 4px 0; border: 1px solid #c9cec8; border-radius: 99px; background: #fff; font: inherit; cursor: pointer; }
+.feedback button:focus-visible { outline: 3px solid #1d5fbf; outline-offset: 2px; }

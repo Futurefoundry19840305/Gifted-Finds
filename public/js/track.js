@@ -14,8 +14,30 @@
     }
     document.querySelectorAll("button.copy[data-copy]").forEach(function (b) {
       b.addEventListener("click", function () {
-        navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () { b.textContent = "コピーしました"; });
+        var fail = function () { b.textContent = "コピーできませんでした。文例を長押しかドラッグで選んでコピーしてください"; };
+        try { navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () { b.textContent = "コピーしました"; }, fail); } catch (e) { fail(); }
       });
     });
+    document.querySelectorAll("[data-back]").forEach(function (a) {
+      a.addEventListener("click", function (e) { if (history.length > 1) { e.preventDefault(); history.back(); } else { a.href = "/"; } });
+    });
+    var fb = document.querySelector("[data-feedback]");
+    if (fb) {
+      var answer = null, send = function (reason) {
+        try { navigator.sendBeacon("/f", location.pathname + "|" + answer + "|" + (reason || "")); } catch (e) {}
+      };
+      var step = function (n) { fb.querySelectorAll("[data-step]").forEach(function (el) { el.hidden = el.getAttribute("data-step") !== String(n); }); };
+      fb.querySelectorAll("[data-answer]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          answer = b.getAttribute("data-answer"); send("");
+          fb.querySelector("[data-yes]").hidden = answer !== "yes";
+          fb.querySelector("[data-no]").hidden = answer !== "no";
+          step(2); var first = fb.querySelector(answer === "yes" ? "[data-yes] button" : "[data-no] button"); if (first) first.focus();
+        });
+      });
+      fb.querySelectorAll("[data-reason]").forEach(function (b) {
+        b.addEventListener("click", function () { send(b.getAttribute("data-reason")); step(3); });
+      });
+    }
   } catch (e) { /* 失敗しても表示には影響させない */ }
 })();

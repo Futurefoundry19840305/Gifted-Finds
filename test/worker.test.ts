@@ -45,3 +45,14 @@ describe("normalizeViewPath", () => {
     expect(normalizeViewPath("/a/" + "x".repeat(200) + "/")).toBeNull();
   });
 });
+
+import { parseFeedback } from "../worker/index";
+describe("parseFeedback", () => {
+  it("決まった選択肢だけ受け付ける", () => {
+    expect(parseFeedback("/food/a/|yes|")).toEqual({ path: "/food/a/", answer: "yes", reason: "" });
+    expect(parseFeedback("/food/a/|no|price")).toEqual({ path: "/food/a/", answer: "no", reason: "price" });
+    expect(parseFeedback("/food/a/|no|山田です")).toBeNull();
+    expect(parseFeedback("/food/a/?x=1|yes|")).toBeNull();
+    expect(parseFeedback("/food/a/|maybe|")).toBeNull();
+  });
+});

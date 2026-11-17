@@ -1,0 +1,24 @@
+---
+// 「この記事は役に立ちましたか」。答えと理由の選択肢だけを集計し、自由記述や個人情報は受け取らない
+---
+<section class="feedback" data-feedback aria-labelledby="fb-h">
+  <h2 id="fb-h">このページは役に立ちましたか</h2>
+  <div class="fb-step" data-step="1">
+    <button type="button" data-answer="yes">役に立った</button>
+    <button type="button" data-answer="no">役に立たなかった</button>
+  </div>
+  <div class="fb-step" data-step="2" hidden>
+    <p>よければ理由を1つ選んでください（選ばなくても大丈夫です）。</p>
+    <div class="fb-reasons" data-yes>
+      <button type="button" data-reason="found">選ぶ品が決まった</button>
+      <button type="button" data-reason="clear">マナーがわかった</button>
+    </div>
+    <div class="fb-reasons" data-no hidden>
+      <button type="button" data-reason="hard-to-choose">候補が多くて選べない</button>
+      <button type="button" data-reason="not-found">知りたいことが載っていない</button>
+      <button type="button" data-reason="price">価格や在庫が合わない</button>
+      <button type="button" data-reason="too-long">長くて読みにくい</button>
+    </div>
+  </div>
+  <p class="fb-thanks" data-step="3" hidden aria-live="polite">ありがとうございました。記事の改善に使います。</p>
+</section>

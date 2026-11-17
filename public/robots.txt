@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /go/
 Allow: /
 
-Sitemap: https://kisetsu-gift.workers.dev/sitemap-index.xml
+Sitemap: https://gifted-finds.54551491mssa.workers.dev/sitemap-index.xml

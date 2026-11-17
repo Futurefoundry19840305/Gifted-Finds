@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import ArticleList from "../../components/ArticleList.astro";
+import site from "../../site.config.json";
+import { publishedArticles } from "../../articles";
+export function getStaticPaths() {
+  return Object.entries(site.genres).map(([genre, name]) => ({ params: { genre }, props: { name } }));
+}
+const { genre } = Astro.params;
+const { name } = Astro.props;
+const items = (await publishedArticles()).filter((a) => a.data.genre === genre);
+---
+<Base title={`${name}の記事一覧`} description={`${name}の比較・選び方ガイドの一覧です。季節ごとに、予算や用途で選べる記事を更新しています。`} crumbs={[{ name, href: `/${genre}/` }]}>
+  <h1>{name}</h1>
+  <ArticleList items={items} />
+</Base>

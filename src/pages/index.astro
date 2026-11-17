@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+import ArticleList from "../components/ArticleList.astro";
+import themes from "../data/themes.json";
+import site from "../site.config.json";
+import { publishedArticles } from "../articles";
+const all = await publishedArticles();
+const order = { peak: 0, launch: 1, prepare: 2 } as Record<string, number>;
+const active = themes.filter((t) => t.state in order).sort((a, b) => order[a.state] - order[b.state]);
+---
+<Base title={site.name} description={`${site.tagline}。お歳暮・おせち・加湿器など、今の季節に必要なものを予算と用途で比べられます。`}
+  jsonld={[{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url }]}>
+  <section class="hero"><h1>{site.name}</h1><p>{site.tagline}</p></section>
+  <section>
+    <h2>いまの季節の特集</h2>
+    <ul class="theme-grid">
+      {active.map((t) => <li class={`theme theme-${t.state}`}><a href={`/season/${t.id}/`}><strong>{t.name}</strong><span>{t.lead}</span></a></li>)}
+    </ul>
+  </section>
+  <section><h2>新着・更新記事</h2><ArticleList items={all.slice(0, 10)} /></section>
+</Base>

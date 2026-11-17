@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /go/
+Allow: /
+
+Sitemap: https://kisetsu-gift.workers.dev/sitemap-index.xml

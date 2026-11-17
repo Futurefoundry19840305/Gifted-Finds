@@ -1,0 +1,40 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import themes from "../../data/themes.json";
+import { publishedArticles } from "../../articles";
+import { genreName, fmtDate, getProduct } from "../../lib";
+export async function getStaticPaths() {
+  return (await publishedArticles()).map((a) => ({ params: { genre: a.data.genre, slug: a.id }, props: { a } }));
+}
+const { a } = Astro.props;
+const { Content } = await render(a);
+const d = a.data;
+const theme = themes.find((t) => t.id === d.theme);
+const shown = d.products.filter((p) => getProduct(p.code)?.availability === 1);
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const jsonld = [{
+  "@context": "https://schema.org", "@type": "Article", headline: d.title, description: d.description,
+  datePublished: d.published.toISOString(), dateModified: d.updated.toISOString(), mainEntityOfPage: url,
+}, ...(d.type === "ranking" && shown.length ? [{
+  "@context": "https://schema.org", "@type": "ItemList",
+  itemListElement: shown.map((p, i) => ({ "@type": "ListItem", position: i + 1, name: getProduct(p.code)!.name })),
+}] : [])];
+const crumbs = [{ name: genreName(d.genre), href: `/${d.genre}/` }, { name: d.title, href: `/${d.genre}/${a.id}/` }];
+---
+<Base title={d.title} description={d.description} jsonld={jsonld} crumbs={crumbs}>
+  <article class="post">
+    <p class="pr-inline">本ページはプロモーション（広告）を含みます。</p>
+    <h1>{d.title}</h1>
+    <p class="meta">{fmtDate(d.updated)}更新{theme && <> ・ <a href={`/season/${theme.id}/`}>{theme.name}特集</a></>}</p>
+    <section class="axes"><h2>この記事の比べ方</h2><ul>{d.axes.map((x) => <li>{x}</li>)}</ul></section>
+    <Content />
+    {shown.length > 0 && (
+      <section class="products"><h2>{d.type === "ranking" ? "おすすめ一覧" : "条件別のおすすめ"}</h2>
+        {shown.map((p, i) => <ProductCard article={a.id} version={d.version} code={p.code} position={p.position} rank={d.type === "ranking" ? i + 1 : undefined} label={p.label} points={p.points} />)}
+      </section>
+    )}
+    <p class="note">掲載内容は更新日時点の情報です。価格・在庫・仕様は変わることがあるため、購入前に各商品ページでご確認ください。順位は当サイトの比較軸に基づく編集部の整理で、販売数の順位ではありません。</p>
+  </article>
+</Base>

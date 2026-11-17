@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import ArticleList from "../../components/ArticleList.astro";
+import themes from "../../data/themes.json";
+import { publishedArticles } from "../../articles";
+export async function getStaticPaths() {
+  return themes.map((t) => ({ params: { theme: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const items = (await publishedArticles()).filter((a) => a.data.theme === t.id);
+const md = (s: string) => s.replace("-", "月") + "日";
+const desc = t.lead || `${t.name}の特集ページです。毎年${md(t.peak[0])}ごろから内容を更新します。`;
+---
+<Base title={`${t.name}特集`} description={desc.length < 50 ? `${desc} 予算・用途・相手別に比べられる記事をまとめています。` : desc}
+  crumbs={[{ name: "季節特集", href: "/season/" }, { name: t.name, href: `/season/${t.id}/` }]}>
+  <h1>{t.name}特集</h1>
+  <p>{t.lead}</p>
+  {t.state === "dormant" && <p class="notice">この特集は次のシーズンに向けて準備中です。毎年{md(t.peak[0])}ごろに更新します。</p>}
+  <ArticleList items={items} />
+</Base>

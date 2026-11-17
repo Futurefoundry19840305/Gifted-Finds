@@ -1,0 +1,28 @@
+---
+import { getProduct, freshPrice, goUrl, fmtDateTime } from "../lib";
+interface Props { article: string; version: number; code: string; position: string; rank?: number; label?: string; points?: string[] }
+const { article, version, code, position, rank, label, points = [] } = Astro.props;
+const p = getProduct(code);
+const price = p ? freshPrice(p) : null;
+const available = p && p.availability === 1;
+---
+{p && available && (
+  <article class="product">
+    {rank && <p class="rank">{rank}位</p>}
+    {label && <p class="label">{label}</p>}
+    <div class="product-body">
+      {p.image && <img src={p.image} alt={p.name} width="128" height="128" loading="lazy" decoding="async" referrerpolicy="no-referrer" />}
+      <div>
+        <h3 class="product-name">{p.name}</h3>
+        {p.shop && <p class="shop">{p.shop}</p>}
+        {price != null
+          ? <p class="price">{price.toLocaleString("ja-JP")}円<small>（{fmtDateTime(p.fetchedAt)}時点・楽天市場調べ）</small></p>
+          : <p class="price muted">価格は楽天市場でご確認ください</p>}
+        {p.reviewCount ? <p class="review">レビュー平均 {p.reviewAvg?.toFixed(2)}（{p.reviewCount.toLocaleString("ja-JP")}件）</p> : null}
+      </div>
+    </div>
+    {points.length > 0 && <ul class="points">{points.map((t) => <li>{t}</li>)}</ul>}
+    <a class="cta" href={goUrl(article, code, position, version)} rel="sponsored nofollow noopener" target="_blank">楽天市場で詳細を見る</a>
+    <p class="note">最新の価格・在庫・送料は楽天市場の商品ページでご確認ください。</p>
+  </article>
+)}

@@ -1,0 +1,13 @@
+{
+  "name": "季節の暮らしとギフト",
+  "url": "https://kisetsu-gift.workers.dev",
+  "tagline": "季節の行事と贈りものを、比べて選べるガイド",
+  "operator": "（屋号未定）",
+  "contactFormUrl": "",
+  "genres": {
+    "gift": "ギフト",
+    "kaden": "季節家電",
+    "food": "食品",
+    "outdoor": "アウトドア"
+  }
+}

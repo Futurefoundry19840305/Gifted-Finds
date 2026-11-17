@@ -1,0 +1,10 @@
+[
+  { "id": "oseibo", "name": "お歳暮", "genre": "food", "peak": ["11-20", "12-20"], "state": "peak", "lead": "お世話になった方へ贈るお歳暮を、予算と相手別に比べて選べます。" },
+  { "id": "osechi", "name": "おせち", "genre": "food", "peak": ["12-01", "12-28"], "state": "launch", "lead": "2027年のおせちを、人数・予算・届け方で比べます。" },
+  { "id": "kashitsuki", "name": "加湿器", "genre": "kaden", "peak": ["11-15", "01-31"], "state": "peak", "lead": "部屋の広さと手入れのしやすさで選ぶ、冬の加湿器ガイド。" },
+  { "id": "christmas-gift", "name": "クリスマスギフト", "genre": "gift", "peak": ["12-01", "12-24"], "state": "launch", "lead": "相手と予算から探せるクリスマスプレゼント。" },
+  { "id": "fukubukuro", "name": "福袋", "genre": "gift", "peak": ["12-15", "01-10"], "state": "prepare", "lead": "2027年の福袋を、予約開始日と中身の傾向で整理します。" },
+  { "id": "valentine", "name": "バレンタイン", "genre": "food", "peak": ["01-25", "02-14"], "state": "dormant", "lead": "" },
+  { "id": "shinseikatsu-kaden", "name": "新生活家電", "genre": "kaden", "peak": ["02-15", "04-10"], "state": "dormant", "lead": "" },
+  { "id": "spring-camp", "name": "春キャンプ", "genre": "outdoor", "peak": ["03-20", "05-06"], "state": "dormant", "lead": "" }
+]

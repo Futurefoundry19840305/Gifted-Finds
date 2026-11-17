@@ -34,3 +34,14 @@ describe("firstImage", () => {
     expect(firstImage({} as any)).toBeNull();
   });
 });
+
+import { normalizeViewPath } from "../worker/index";
+describe("normalizeViewPath", () => {
+  it("サイト内のパスだけ受け付ける", () => {
+    expect(normalizeViewPath("/")).toBe("/");
+    expect(normalizeViewPath("/food/oseibo-ham/")).toBe("/food/oseibo-ham/");
+    expect(normalizeViewPath("/food/oseibo-ham/?email=a@b.c")).toBeNull();
+    expect(normalizeViewPath("https://evil.com/")).toBeNull();
+    expect(normalizeViewPath("/a/" + "x".repeat(200) + "/")).toBeNull();
+  });
+});

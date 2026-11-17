@@ -1,6 +1,8 @@
 // マナー記事を読んだことを覚え、比較記事の /go/ リンクに付ける（要件 FR-018）
 // 個人を特定する情報は扱わない。sessionStorage はタブを閉じると消える。
 (function () {
+  // 閲覧数：送るのはページのパスだけ（IP・Cookie・端末情報は送らない）
+  try { navigator.sendBeacon("/v", location.pathname); } catch (e) {}
   try {
     var el = document.querySelector("[data-manner]");
     if (el) sessionStorage.setItem("from_manner", el.getAttribute("data-manner"));

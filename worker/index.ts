@@ -85,6 +85,27 @@ async function handleGo(request: Request, env: Env, ctx: ExecutionContext): Prom
   });
 }
 
+// ---------- 閲覧数（個人情報を扱わない集計） ----------
+// 受け取るのはパスだけ。IP・ヘッダー・Cookieは読まず、保存もしない。
+export function normalizeViewPath(raw: string): string | null {
+  const p = raw.trim();
+  if (p.length > 120) return null;
+  return /^\/(?:[a-z0-9-]+\/)*$/.test(p) ? p : null;
+}
+
+async function handleView(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  if (request.method !== "POST") return new Response(null, { status: 405 });
+  const ua = request.headers.get("user-agent") || "";
+  const path = normalizeViewPath((await request.text()).slice(0, 200));
+  if (path && !BOT_UA.test(ua)) {
+    const date = new Date().toISOString().slice(0, 10);
+    ctx.waitUntil(env.DB.prepare(
+      "INSERT INTO views (date, path, count) VALUES (?, ?, 1) ON CONFLICT(date, path) DO UPDATE SET count = count + 1"
+    ).bind(date, path).run());
+  }
+  return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
+}
+
 // ---------- 楽天API ----------
 
 type RakutenItem = {
@@ -209,6 +230,7 @@ export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     if (url.pathname.startsWith("/go/")) return handleGo(request, env, ctx);
+    if (url.pathname === "/v") return handleView(request, env, ctx);
     return env.ASSETS.fetch(request);
   },
   async scheduled(event: ScheduledController, env: Env, ctx: ExecutionContext) {

@@ -5,6 +5,7 @@ import site from "../site.config.json";
 <Base title="お問い合わせ" description="当サイトへのお問い合わせ方法のご案内です。掲載内容の誤りや削除のご依頼は、こちらのフォームからお知らせください。" crumbs={[{ name: "お問い合わせ", href: "/contact/" }]}>
   <h1>お問い合わせ</h1>
   <p>掲載内容の誤り、削除のご依頼、その他のお問い合わせは、下記のフォームからお送りください。商品の注文・配送についてのお問い合わせは、各販売店へお願いします。</p>
+  <p>お名前の入力は不要です。返信が必要な場合だけ、メールアドレスをご記入ください。</p>
   {site.contactFormUrl
     ? <p><a class="cta" href={site.contactFormUrl} rel="noopener" target="_blank">お問い合わせフォームを開く（Googleフォーム）</a></p>
     : <p class="muted">お問い合わせフォームは準備中です。</p>}

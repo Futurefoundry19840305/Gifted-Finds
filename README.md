@@ -26,7 +26,7 @@
    - 楽天ウェブサービスのアプリ設定の「WebサイトURL」（Referer チェック用）
 4. Worker の「設定 → 変数とシークレット」に、種類「シークレット」で3つ登録する
    - `RAKUTEN_APP_ID`、`RAKUTEN_ACCESS_KEY`、`RAKUTEN_AFFILIATE_ID`
-5. Worker の「設定 → 可観測性」と、Web Analytics を有効にする
+5. 可観測性（ログ）と Web Analytics は有効にしない（個人情報を扱わない方針。閲覧数は `/v` で自前に集計）
 
 ## ローカル確認
 

@@ -6,7 +6,7 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": ["/go/*"],
+    "run_worker_first": ["/go/*", "/v"],
     "not_found_handling": "404-page"
   },
   "d1_databases": [
@@ -15,5 +15,6 @@
   // 4:00 JST にランキング＋商品更新、10:00/16:00/22:00 JST に商品更新のみ
   "triggers": { "crons": ["0 19 * * *", "0 1,7,13 * * *"] },
   "vars": { "SITE_URL": "https://gifted-finds.54551491mssa.workers.dev" },
-  "observability": { "enabled": true }
+  // 個人情報を残さないため、リクエストのログは保存しない（エラーは runs 表に自前で記録）
+  "observability": { "enabled": false }
 }

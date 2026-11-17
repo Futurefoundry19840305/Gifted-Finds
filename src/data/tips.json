@@ -211,6 +211,21 @@
       "facts": [
         "intl-france-host"
       ]
+    },
+    {
+      "id": "rakuten-social-gift",
+      "category": "楽天で贈るときのコツ",
+      "status": "review",
+      "themes": [
+        "temiyage-business",
+        "kekkon-shussan",
+        "taishoku-iwai"
+      ],
+      "title": "住所を知らない相手にも贈れる「楽天ソーシャルギフト」",
+      "body": "購入後に届く受け取り用のリンクをLINEやメールで送ると、相手が自分で住所を入力して受け取れます。対応している商品だけで使えるので、商品ページで確かめましょう。",
+      "facts": [
+        "rakuten-social-gift"
+      ]
     }
   ]
 }

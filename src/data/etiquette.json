@@ -54,6 +54,15 @@
         "https://www.post.japanpost.jp/int/ems/ryugaku/know/"
       ],
       "checked": "2026-11-17"
+    },
+    "rakuten-social-gift": {
+      "region": "全般",
+      "fact": "楽天ソーシャルギフト（2026年5月1日開始）は、受け取り用リンクを送り、相手が自分で住所を入力する仕組み。対応商品のみ",
+      "sources": [
+        "https://www.watch.impress.co.jp/docs/news/2106215.html",
+        "https://www.commercepick.com/archives/92256"
+      ],
+      "checked": "2026-11-17"
     }
   }
 }

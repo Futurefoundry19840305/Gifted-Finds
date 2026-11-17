@@ -65,10 +65,12 @@ async function handleGo(request: Request, env: Env, ctx: ExecutionContext): Prom
     let refHost: string | null = null;
     try { refHost = ref ? new URL(ref).hostname : null; } catch { /* 無視 */ }
     const device = /mobile|iphone|android/i.test(ua) ? "mobile" : "desktop";
+    const m = url.searchParams.get("m");
+    const fromManner = m && /^[a-z0-9-]{1,80}$/.test(m) ? m : null;
     ctx.waitUntil(
       env.DB.prepare(
-        "INSERT INTO clicks (ts, article_id, item_code, position, version, ref_host, device) VALUES (?,?,?,?,?,?,?)"
-      ).bind(new Date().toISOString(), p.articleId, p.itemCode, p.position, p.version, refHost, device).run()
+        "INSERT INTO clicks (ts, article_id, item_code, position, version, ref_host, device, from_manner) VALUES (?,?,?,?,?,?,?,?)"
+      ).bind(new Date().toISOString(), p.articleId, p.itemCode, p.position, p.version, refHost, device, fromManner).run()
     );
   }
 

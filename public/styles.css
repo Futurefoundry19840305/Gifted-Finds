@@ -49,3 +49,13 @@ table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { bord
 .site-footer { border-top: 1px solid var(--line); padding: 24px 16px; text-align: center; font-size: 13px; color: var(--muted); }
 .site-footer ul { list-style: none; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
 @media (max-width: 480px) { h1 { font-size: 22px; } .product-body img { width: 96px; height: 96px; } }
+/* マナー記事 */
+.manner .summary { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 4px 20px 12px; }
+.manner .summary h2 { border: 0; margin-top: 12px; font-size: 15px; }
+.manner details { border-top: 1px solid var(--line); padding: 12px 0; }
+.manner summary { cursor: pointer; font-weight: 700; min-height: 32px; }
+.manner .letter { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; margin: 12px 0; }
+.manner .letter-title { margin: 0; font-weight: 700; }
+.manner .letter-body { white-space: pre-line; }
+.manner .copy { min-height: 44px; padding: 0 16px; border: 1px solid var(--accent); background: #fff; color: var(--accent); border-radius: 8px; font: inherit; font-weight: 700; cursor: pointer; }
+.manner .sources { font-size: 14px; color: var(--muted); }

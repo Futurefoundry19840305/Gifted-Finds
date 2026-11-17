@@ -44,7 +44,7 @@ const jaccard = (a, b) => {
 };
 
 const all = fs.readdirSync(DIR).filter((f) => f.endsWith(".md")).map((f) => parse(path.join(DIR, f)));
-const targets = process.argv.length > 2 ? process.argv.slice(2).map(parse) : all.filter((a) => a.fm.status === "published");
+const targets = process.argv.length > 2 ? process.argv.slice(2).filter((f) => !f.includes("/manners/")).map(parse) : all.filter((a) => a.fm.status === "published");
 
 const report = [];
 for (const a of targets) {
@@ -68,6 +68,26 @@ for (const a of targets) {
     if (j >= 0.3) errors.push(`既存記事との重複率 ${(j * 100).toFixed(0)}%: ${path.basename(b.file)}（SG-02）`);
   }
   report.push({ file: a.file, ok: errors.length === 0, errors });
+}
+
+// ---- マナー記事（要件 SG-07 / SG-08） ----
+const MDIR = "src/content/manners";
+const facts = JSON.parse(fs.readFileSync("src/data/etiquette.json", "utf8")).facts;
+const manners = fs.existsSync(MDIR) ? fs.readdirSync(MDIR).filter((f) => f.endsWith(".md")).map((f) => path.join(MDIR, f)) : [];
+const mTargets = process.argv.length > 2 ? process.argv.slice(2).filter((f) => f.includes("/manners/")) : manners;
+for (const file of mTargets) {
+  const raw = fs.readFileSync(file, "utf8");
+  if (process.argv.length <= 2 && !/^status:\s*published/m.test(raw)) continue;
+  const errors = [];
+  const sources = (raw.match(/^\s+url:\s*\S+/gm) ?? []).length;
+  if (sources < 2) errors.push(`出典が2件未満（${sources}件）（SG-07）`);
+  const ids = (raw.match(/^facts:\s*\n((?:\s+-.*\n?)+)/m)?.[1] ?? "").split("\n").map((l) => l.replace(/^\s*-\s*/, "").replace(/["']/g, "").trim()).filter(Boolean);
+  for (const id of ids) if (!facts[id]) errors.push(`元帳にない事実: ${id}（SG-07）`);
+  const checked = raw.match(/^checked:\s*(\S+)/m)?.[1];
+  if (!checked || Date.now() - new Date(checked).getTime() > 400 * 86400000) errors.push("確認日が400日より前か未記入");
+  for (const re of [/必ず|絶対に|しなければなりません|常識です|非常識/]) { const h = raw.match(re); if (h) errors.push(`断定表現「${h[0]}」（SG-08）`); }
+  if (!/一般的|地域|ご家庭/.test(raw)) errors.push("「一般的」「地域によって」などの言い方がない（SG-08）");
+  report.push({ file, ok: errors.length === 0, errors });
 }
 
 console.log(JSON.stringify({ checked: report.length, failed: report.filter((r) => !r.ok).length, report }, null, 2));

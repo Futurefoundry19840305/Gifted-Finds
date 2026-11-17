@@ -24,4 +24,21 @@ const articles = defineCollection({
   }),
 });
 
-export const collections = { articles };
+const manners = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/manners" }),
+  schema: z.object({
+    title: z.string().max(60),
+    description: z.string().min(50).max(140),
+    theme: z.string(),
+    status: z.enum(["draft", "review", "published"]).default("draft"), // review = 人の確認待ち（SG-09）
+    checked: z.coerce.date(),                     // 内容の確認日
+    summary: z.array(z.string()).min(2).max(4),   // 要点
+    facts: z.array(z.string()).min(1),            // etiquette_facts のID（SG-07）
+    sources: z.array(z.object({ title: z.string(), url: z.string().url() })).min(2),
+    cases: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    letters: z.array(z.object({ title: z.string(), body: z.string() })).default([]),
+    related: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
+  }),
+});
+
+export const collections = { articles, manners };

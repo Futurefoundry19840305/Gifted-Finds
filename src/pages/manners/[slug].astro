@@ -1,0 +1,45 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import themes from "../../data/themes.json";
+import { fmtDate } from "../../lib";
+export async function getStaticPaths() {
+  const list = await getCollection("manners", ({ data }) => data.status === "published");
+  return list.map((m) => ({ params: { slug: m.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const { Content } = await render(m);
+const d = m.data;
+const theme = themes.find((t) => t.id === d.theme);
+const url = new URL(Astro.url.pathname, Astro.site).toString();
+const jsonld = [{
+  "@context": "https://schema.org", "@type": "Article", headline: d.title, description: d.description,
+  dateModified: d.checked.toISOString(), mainEntityOfPage: url,
+}];
+const crumbs = [{ name: "贈りものマナー", href: "/manners/" }, ...(theme ? [{ name: theme.name, href: `/season/${theme.id}/` }] : []), { name: d.title, href: `/manners/${m.id}/` }];
+---
+<Base title={d.title} description={d.description} jsonld={jsonld} crumbs={crumbs}>
+  <article class="post manner" data-manner={m.id}>
+    <p class="pr-inline">本ページはプロモーション（広告）を含みます。</p>
+    <h1>{d.title}</h1>
+    <p class="meta">内容の確認日 {fmtDate(d.checked)}・出典は記事の最後に記載</p>
+    <section class="summary"><h2>要点</h2><ul>{d.summary.map((s) => <li>{s}</li>)}</ul></section>
+    <Content />
+    {d.cases.length > 0 && (
+      <section><h2>こんなときは</h2>{d.cases.map((c) => <details><summary>{c.q}</summary><p>{c.a}</p></details>)}</section>
+    )}
+    {d.letters.length > 0 && (
+      <section><h2>文例</h2>{d.letters.map((l) => (
+        <div class="letter"><p class="letter-title">{l.title}</p><p class="letter-body">{l.body}</p><button type="button" class="copy" data-copy={l.body}>文例をコピー</button></div>
+      ))}</section>
+    )}
+    {d.related.length > 0 && (
+      <section class="next"><h2>注文前のチェックと、品物選び</h2><ul>{d.related.map((r) => <li><a href={r.href}>{r.label}</a></li>)}</ul></section>
+    )}
+    <section class="sources"><h2>出典と確認日</h2>
+      <ol>{d.sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a>（確認日 {fmtDate(d.checked)}）</li>)}</ol>
+      <p class="note">しきたりは地域やご家庭によって異なります。迷ったときは、相手に近い方や贈る地域の慣習を優先してください。</p>
+    </section>
+  </article>
+  <script src="/js/track.js" defer></script>
+</Base>

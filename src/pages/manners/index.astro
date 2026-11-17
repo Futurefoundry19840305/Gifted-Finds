@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import themes from "../../data/themes.json";
+const list = await getCollection("manners", ({ data }) => data.status === "published");
+const byTheme = themes.map((t) => ({ t, items: list.filter((m) => m.data.theme === t.id) })).filter((g) => g.items.length);
+---
+<Base title="贈りものマナー" description="お歳暮・お中元・内祝いなど、贈りもののマナーを季節ごとにまとめています。時期、相場、のしと表書き、文例を、出典つきで確認できます。" crumbs={[{ name: "贈りものマナー", href: "/manners/" }]}>
+  <h1>贈りものマナー</h1>
+  {byTheme.length === 0 ? <p class="muted">記事を準備中です。</p> : byTheme.map((g) => (
+    <section><h2>{g.t.name}</h2><ul class="article-list">{g.items.map((m) => <li><a href={`/manners/${m.id}/`}><strong>{m.data.title}</strong><span class="desc">{m.data.description}</span></a></li>)}</ul></section>
+  ))}
+</Base>

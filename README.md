@@ -12,7 +12,9 @@
 | `src/content/articles/` | 記事（Markdown）。`status: published` だけが公開される |
 | `src/data/products.json` | 記事に載せる商品のスナップショット（定期実行が D1 から書き出す） |
 | `src/data/themes.json` | 季節テーマと状態（prepare / launch / peak / wind_down / dormant） |
-| `scripts/gate.mjs` | 公開前ゲート。`npm run check:gate` |
+| `src/content/manners/` | マナー記事。事実は `src/data/etiquette.json`（D1 `etiquette_facts` の書き出し）にあるものだけを使う |
+| `public/js/track.js` | マナー記事から比較記事へ進んだことを `/go/?m=` で記録 |
+| `scripts/gate.mjs` | 公開前ゲート（比較記事：SG-01/02、マナー記事：SG-07/08）。`npm run check:gate` |
 
 ## 初回設定（Cloudflare ダッシュボード）
 

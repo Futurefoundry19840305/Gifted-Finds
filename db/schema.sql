@@ -60,3 +60,4 @@ CREATE TABLE IF NOT EXISTS runs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   ts TEXT NOT NULL, job TEXT NOT NULL, status TEXT NOT NULL, detail TEXT
 );
+-- 002_manners.sql も適用済み（etiquette_facts、clicks.from_manner）
